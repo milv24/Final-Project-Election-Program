@@ -29,10 +29,16 @@ int votar_options()
            "\n\n\t\tAqui puede ejercer su derecho al voto =)"
            "\n\n Desea confirmar su colegio Electoral antes? 1/0: \n");
     while ((decission = getchar()) != '\n' || (decission = getchar()) != '\r')
+    {
         if (decission == '1')
+        {
             return /*colegios_electorales*/;
+        }
         else
+        {
             /*registrar_su_voto*/;
+        }
+    }
 }
 
 int print_start_menu()
@@ -61,9 +67,11 @@ int print_start_menu()
         scanf("%d", &options);
         getchar();
         if ((options <= 0 && i != 3) || options > 6)
+        {
             printf("Heyyy, debes eligir una opcion correcta!!!\n"
                    "Porque, pues te quedan %zu intentos.\n",
                    i);
+        }
     }
 
     if (options >= VOTE && options <= EXIT)
@@ -99,8 +107,8 @@ int print_start_menu()
 }
 
 void system_loading(int time)
-{   
-    #ifdef __WIN32
+{
+#ifdef __WIN32
     time += time * 1000;
 #endif //__WIN32
 
