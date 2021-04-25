@@ -49,12 +49,16 @@ void votante_register()
             printf("\nNumero de Identificacion(11digitos):)");
             scanf("%u", &id);
             getchar();
+            strcpy(votantes[i].ID,id)
             printf("\nEdad(+18):");
             scanf("%u", &edad);
             getchar();
+            strcpy(votantes[i].age,edad)
             printf("\nColegio Electoral");
             scanf("%d", &colegio);
             getchar();
+            strcpy(votantes[i].colegio_electoral,colegio)
         }
+
     
 }

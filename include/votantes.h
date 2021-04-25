@@ -4,13 +4,13 @@
 /**
  * @brief Estructura llenar los datos del votante 
  */
- struct Votantes[50]
+ typedef struct Votantes
 {
    char name[50];
    char lastname[50];
    unsigned age;
    unsigned ID[11];
-   int colegio_electoral;
+   bool colegio_electoral;
 
 };
 
