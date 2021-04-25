@@ -14,7 +14,7 @@ const short time = 2;
 
 int votar_options()
 {
-    char decission = 0;
+    int decission = 0;
 
     fflush(stdout);
     system("cls||clear");
@@ -76,14 +76,15 @@ int print_start_menu()
     case VOTE:
         return votar_options();
     case ELEGIBLE_TO_VOTE:
-        return compras_menu();
+        return 
     case CANDIDATE_WITH_MOST_VOTES:
-        return ventas_menu();
+        return 
 
     case CANDIDATE_WITH_LESS_VOTES:
-        return contabilidad_menu();
+        return 
 
     case CONFIRM_COLEGIO_ELECTORAL:
+        return colegios_disponibles();
 
     case EXIT:
         fflush(stdout);
