@@ -6,6 +6,8 @@
 /*  Practica: Trabajo Final                                 */
 /*  Fecha: 27/4/2021                                        */
 /************************************************************/
+
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

@@ -1,3 +1,13 @@
+/**
+ * @file candidatos.c
+ * @author your name (victoriomilvia@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2021-04-23
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,6 +25,15 @@
 
 //TODO quiero hacer que imprima cuantas personas votaron por este candidato
 //TODO como puedo guardar los votos 
+/**
+ * @brief Con esta funcion se elegiran los candidatos
+ * Se ira sumando un contador para cada candidato por cada voto por ellos
+ * @return int 
+ */
+int select_your_candidate()
+{
+
+}
 /**
  * @brief Aqui se va amostrar el candidato con menos votos por el momento
  * y va a imprimir la cantidad de votos que obtuvo

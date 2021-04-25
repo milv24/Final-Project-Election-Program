@@ -1,3 +1,13 @@
+/**
+ * @file inicio.c
+ * @author your name (victoriomilvia@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2021-04-25
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,8 +21,9 @@
 #include "../include/inicio.h"
 // Tiempo que durara el copilador parado.
 
-#define time 2
+enum menu_option;
 
+#define time 2
 int votar_options()
 {
     int decission = 0;
@@ -107,7 +118,7 @@ int print_start_menu()
     return 0;
 }
 
-void system_loading(int time)
+void system_loading()
 {
 #ifdef __WIN32
     time += time * 1000;
@@ -127,7 +138,7 @@ void system_loading(int time)
         {
             fflush(stdout);
             system("cls||clear");
-        };
+        }
 #ifdef __WIN32
         Sleep(time);
 #else
@@ -135,7 +146,6 @@ void system_loading(int time)
 #endif //__WIN32
     }
 }
-
 void clear_screen()
 {
     fflush(stdout);

@@ -1,3 +1,14 @@
+/**
+ * @file colegios.c
+ * @author your name (victoriomilvia@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2021-04-23
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
