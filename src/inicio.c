@@ -78,10 +78,10 @@ int print_start_menu()
     case ELEGIBLE_TO_VOTE:
         return 
     case CANDIDATE_WITH_MOST_VOTES:
-        return 
+        return; 
 
     case CANDIDATE_WITH_LESS_VOTES:
-        return 
+        return; 
 
     case CONFIRM_COLEGIO_ELECTORAL:
         return colegios_disponibles();
