@@ -42,15 +42,14 @@ int print_start_menu();
 /**
  * @brief Mostrara que el sistema esta trabajando 
  * 
- * @param time tiempo que durara el compilador parado
  */
-void system_loading(int time);
+void system_loading(void);
 
 /**
  * @brief Limpiara la pantalla
  * 
  */
-void clear_screen()
+void clear_screen();
 
 
 

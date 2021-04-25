@@ -25,7 +25,14 @@ typedef struct candidatos
 {
     char nombres[50];
     int num_votacion;
-};
+}Candidatos;
+
+/**
+ * @brief 
+ * 
+
+ */
+void select_your_candidate();
 
 /**
  * @brief Esto lo que va a hacer es mostrar el nombre del candidato

@@ -24,11 +24,18 @@
    char name[50];
    char lastname[50];
    unsigned age;
-   unsigned ID[11];
+   unsigned ID;
    bool colegio_electoral;
 
 
 }votantes;
+
+
+/**
+ * @brief 
+ * 
+ */
+void validate_id();
 
 /**
  * @brief Esto va a llenar los datos del votante 
@@ -39,9 +46,7 @@ void votante_register();
 /**
  * @brief Esto va a confirmare si con la edad ingresada se puede votar 
  * 
- * @return true 
- * @return false 
  */
-bool validate_age();
+void validate_age();
 
 #endif//VOTANTES_H

@@ -19,35 +19,39 @@
 #include <unistd.h>
 #endif //__WIN32
 #include "../include/inicio.h"
+#include "../include/colegios.h"
+#include "../include/votantes.h"
+#include "../include/candidatos.h"
 // Tiempo que durara el copilador parado.
-
-enum menu_option;
 
 #define time 2
 int votar_options()
 {
-    int decission = 0;
+    int decission;
 
     fflush(stdout);
     system("cls||clear");
 
     printf("Empezando sistema de carga...\n");
-    system_loading(time);
+    system_loading();
     /**+-+-+-+-+-+-Empieza votar+-+-+-+-+-+- */
 
     printf("\n\t\tSitema de votacion RD 2021\n"
            "\n\tBienvenido!"
            "\n\n\t\tAqui puede ejercer su derecho al voto =)"
-           "\n\n Desea confirmar su colegio Electoral antes? 1/0: \n");
+           "\n\n Si desea confirmar su colegio Electoral antes presione 1 \n"
+           "\nSi quiere ir a la votacion presione 0 o cualquier otra tecla");
+    scanf("%d", &decission);
+
     while ((decission = getchar()) != '\n' || (decission = getchar()) != '\r')
     {
         if (decission == '1')
         {
-            return /*colegios_electorales*/;
+            colegios_disponibles();
         }
         else
         {
-            /*registrar_su_voto*/;
+            select_your_candidate();
         }
     }
 }
@@ -59,11 +63,11 @@ int print_start_menu()
     clear_screen();
     // Para que no se sienta la espera.
     printf("Empezando sistema de carga...\n");
-    system_loading(time);
+    system_loading();
 
     /**+-+-+-+-+-+-Empieza el menu+-+-+-+-+-+- */
 
-    for (size_t i = 3; i > 0 || options > 6; --i)
+    for (unsigned i = 3; i > 0 || options > 6; --i)
     {
         system("cls||clear");
 
@@ -75,61 +79,63 @@ int print_start_menu()
                "\t4- Candidato con menos votos\n"
                "\t5- Ver mi colegio electoral\n"
                "\t6- Salir del sistema \n"); // El usuario saldra cuando presione 6.
-        scanf("%d", &options);
+        scanf("%u", &options);
         getchar();
         if ((options <= 0 && i != 3) || options > 6)
         {
             printf("Heyyy, debes eligir una opcion correcta!!!\n"
-                   "Porque, pues te quedan %zu intentos.\n",
+                   "Porque, pues te quedan %u intentos.\n",
                    i);
         }
     }
 
     if (options >= VOTE && options <= EXIT)
-        break;
-
-    switch (options)
     {
-    case VOTE:
-        return votar_options();
-    case ELEGIBLE_TO_VOTE:
-        return validate_age();
-        /*case CANDIDATE_WITH_MOST_VOTES:
+
+        switch (options)
+        {
+        case VOTE:
+            return votar_options();
+        case ELEGIBLE_TO_VOTE:
+            return validate_age();
+            /*case CANDIDATE_WITH_MOST_VOTES:
         return;
 
     case CANDIDATE_WITH_LESS_VOTES:
         return;
         */
 
-    case CONFIRM_COLEGIO_ELECTORAL:
-        return colegios_disponibles();
-
-    case EXIT:
-        fflush(stdout);
-        system("cls||clear");
-        printf("Gracias por ingresar a este programa!\n");
-        exit(0);
-    default:
-        fprintf(stderr, "Verifica que hayas ingresadouna opcion correcta o "
-                        "envia un issue detallando el posible bug.\n");
-        break;
+        case CONFIRM_COLEGIO_ELECTORAL:
+            colegios_disponibles();
+            break;
+        case EXIT:
+            fflush(stdout);
+            system("cls||clear");
+            printf("Gracias por ingresar a este programa!\n");
+            exit(0);
+        default:
+            fprintf(stderr, "Verifica que hayas ingresadouna opcion correcta o "
+                            "envia un issue detallando el posible bug.\n");
+            break;
+        }
     }
     putchar('\n');
     return 0;
 }
 
-void system_loading()
+void system_loading(void)
 {
+    unsigned temp = 0;
 #ifdef __WIN32
-    time += time * 1000;
+   temp = time * 1000;
 #endif //__WIN32
 
-    for (size_t i = 0; i <= 100; i++)
+    for (unsigned i = 0; i <= 100; i++)
     {
         if (i % 25 == 0)
         {
             fflush(stdout);
-            printf("Su proceso esta %zu%% completado.\r", i);
+            printf("Su proceso esta %u%% completado.\r", i);
         }
         else
             continue;
@@ -140,7 +146,7 @@ void system_loading()
             system("cls||clear");
         }
 #ifdef __WIN32
-        Sleep(time);
+        Sleep(temp);
 #else
         sleep(time);
 #endif //__WIN32

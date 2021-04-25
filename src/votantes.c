@@ -54,19 +54,22 @@ void votante_register()
              */
             printf("\n\t\t\tIntroduzca sus datos para registrar su voto exitosamente"
                    "\nNombre(primer):");
-            scanf("%s", &nombre); //leera el nombre y lo guardara en la variable
-            getchar();
-            strcpy(Votantes[i].name, nombre) //copiara la variable antes pedida y la guardara en la estructura
-                printf("\nApellido(primer):");
-            scanf("%s", , &apellido);
-            getchar();
-            strcpy(Votantes[i].lastname, apellido)
-                printf("\nNumero de Identificacion(11digitos):)");
+            fgets(nombre, sizeof(nombre), stdin); //leera el nombre y lo guardara en la variable
+            nombre[strlen(nombre) - 1] = '\0';
+            strcpy(Votantes[i].name, nombre); //copiara la variable antes pedida y la guardara en la estructura
+
+            printf("\nApellido(primer):");
+            fgets(apellido, sizeof(apellido), stdin);
+            apellido[strlen(apellido) - 1] = '\0';
+            strcpy(Votantes[i].lastname, apellido);
+
+            printf("\nNumero de Identificacion(11digitos):)");
             scanf("%u", &id);
             getchar();
             validate_id();
-            strcpy(Votantes[i].ID, id)
-                printf("\nEdad(+18):");
+            Votantes[i].ID = id;
+
+            printf("\nEdad(+18):");
             scanf("%u", &edad);
             getchar();
             /**
@@ -79,11 +82,11 @@ void votante_register()
                 system("pause");
                 exit(0);
             }
-            strcpy(Votantes[i].age, edad)
-                printf("\nColegio Electoral");
+            Votantes[i].age = edad;
+            printf("\nColegio Electoral");
             scanf("%d", &colegio);
             getchar();
-            strcpy(Votantes[i].colegio_electoral, colegio);
+            Votantes[i].colegio_electoral = colegio;
             if (colegio >= 6)
             {
                 //Como solo hay 5 colegios, si presiona 6 lo saca del sistema
@@ -142,5 +145,4 @@ void validate_id()
             getch();
         }
     }
-    return 0;
 }

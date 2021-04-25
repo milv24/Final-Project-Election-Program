@@ -32,7 +32,7 @@ void colegios_disponibles()
     clear_screen();
 
     printf("Empezando sistema de carga...\n");
-    system_loading(time);
+    system_loading();
 
     /******************Se imprimen los colegios que se han registrado en el fichero************/
     FILE *c; //c= variable de fichero de colegios
@@ -55,12 +55,11 @@ void colegios_disponibles()
     {
         if (decission == 'l' || 'L')
         {
-            return print_start_menu();
+            print_start_menu();
         }
         else
         {
             exit(0);
         }
     }
-    return 0;
 }
