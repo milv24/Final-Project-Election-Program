@@ -10,7 +10,8 @@
 #endif //__WIN32
 #include "../include/inicio.h"
 // Tiempo que durara el copilador parado.
-const short time = 2;
+
+#define time 2
 
 int votar_options()
 {
@@ -38,9 +39,7 @@ int print_start_menu()
 {
     unsigned options = 0;
 
-    fflush(stdout);
-    system("cls||clear");
-
+    clear_screen();
     // Para que no se sienta la espera.
     printf("Empezando sistema de carga...\n");
     system_loading(time);
@@ -50,11 +49,6 @@ int print_start_menu()
     for (size_t i = 3; i > 0 || options > 6; --i)
     {
         system("cls||clear");
-
-        if ((options <= 0 && i != 3) || options > 6)
-            printf("Heyyy, debes eligir una opcion correcta!!!\n"
-                   "Porque, pues te quedan %zu intentos.\n",
-                   i);
 
         printf("\n\tBienvenido al Sistema de Votacion RD  \n"
                "\n\t\t Que deseas hacer?\n"
@@ -66,22 +60,26 @@ int print_start_menu()
                "\t6- Salir del sistema \n"); // El usuario saldra cuando presione 6.
         scanf("%d", &options);
         getchar();
-
-        if (options >= VOTE && options <= EXIT)
-            break;
+        if ((options <= 0 && i != 3) || options > 6)
+            printf("Heyyy, debes eligir una opcion correcta!!!\n"
+                   "Porque, pues te quedan %zu intentos.\n",
+                   i);
     }
+
+    if (options >= VOTE && options <= EXIT)
+        break;
 
     switch (options)
     {
     case VOTE:
         return votar_options();
-    case ELEGIBLE_TO_VOTE:
+        /*case ELEGIBLE_TO_VOTE:
         return 
     case CANDIDATE_WITH_MOST_VOTES:
         return; 
 
     case CANDIDATE_WITH_LESS_VOTES:
-        return; 
+        return; */
 
     case CONFIRM_COLEGIO_ELECTORAL:
         return colegios_disponibles();
@@ -101,8 +99,8 @@ int print_start_menu()
 }
 
 void system_loading(int time)
-{
-#ifdef __WIN32
+{   
+    #ifdef __WIN32
     time += time * 1000;
 #endif //__WIN32
 

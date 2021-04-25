@@ -11,11 +11,10 @@
 #include "../include/colegios.h"
 #include "../include/inicio.h"
 //struct colegios_disponibles;
-
+#define time 2
 //PUDIERA SOLO IMPRIMIR LOS COLEGIOS YA QUE SIEMPRE SERAN LOS MISMOS?
 void colegios_disponibles()
 {
-    short time = 2;
     char decission;
     char temp[100];
 
@@ -44,9 +43,13 @@ void colegios_disponibles()
     while ((decission = getchar()) != '\n' || (decission = getchar()) != '\r')
     {
         if (decission == 'l' || 'L')
+        {
             return print_start_menu();
+        }
         else
+        {
             exit(0);
+        }
     }
     return 0;
 }
