@@ -15,12 +15,13 @@
 #include "../include/candidatos.h"
 int main()
 {
-	system("color 8B"); //cambia el color, el numero cambia el fondo
+	system("color E4"); //cambia el color, el numero cambia el fondo
 						// y la letra cambia el color de letra
 						// https://www.geeksforgeeks.org/how-to-print-colored-text-in-c/
 
 	system("cls||clear");
 
+	print_start_menu();
 	
 
 	return 0;

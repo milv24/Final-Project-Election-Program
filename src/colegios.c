@@ -29,7 +29,7 @@ void colegios_disponibles()
     c = fopen("votantes.txt", "r");
     if (c == NULL)
     {
-        printf("No se pudo abrir el archivo.\n");
+        printf("No se pudo abrir el archivo. Chequealo\n");
         exit(1);
     }
     while (!feof(c))

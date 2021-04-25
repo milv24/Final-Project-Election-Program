@@ -81,13 +81,14 @@ int print_start_menu()
     {
     case VOTE:
         return votar_options();
-        /*case ELEGIBLE_TO_VOTE:
-        return 
-    case CANDIDATE_WITH_MOST_VOTES:
-        return; 
+    case ELEGIBLE_TO_VOTE:
+        return validate_age();
+        /*case CANDIDATE_WITH_MOST_VOTES:
+        return;
 
     case CANDIDATE_WITH_LESS_VOTES:
-        return; */
+        return;
+        */
 
     case CONFIRM_COLEGIO_ELECTORAL:
         return colegios_disponibles();

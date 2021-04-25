@@ -1,10 +1,14 @@
 #ifndef VOTANTES_H
 #define VOTANTES_H
 
+//Librerias a usar:
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
 /**
  * @brief Estructura llenar los datos del votante 
  */
- typedef struct Votantes
+ typedef struct Registro_datos
 {
    char name[50];
    char lastname[50];
@@ -12,7 +16,8 @@
    unsigned ID[11];
    bool colegio_electoral;
 
-};
+
+}votantes;
 
 /**
  * @brief Esto va a llenar los datos del votante 
