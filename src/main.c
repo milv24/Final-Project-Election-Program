@@ -12,9 +12,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "../include/votantes.h"
-#include "../include/colegios.h"
 #include "../include/inicio.h"
-#include "../include/candidatos.h"
 int main()
 {
 	system("color E4"); //cambia el color, el numero cambia el fondo
