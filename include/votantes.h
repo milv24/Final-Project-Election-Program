@@ -26,17 +26,23 @@
    unsigned age;
    unsigned ID;
    bool colegio_electoral;
+   bool has_votado;  //para validar el id
 
 
 }votantes;
 
 
 /**
- * @brief 
+ * @brief Esto va a validar que la cedula no se haya repetido
  * 
  */
 void validate_id();
 
+/**
+ * @brief Esta va a inicializar el voto
+ * 
+ */
+void iniciar_vote();
 
 /**
  * @brief Esto va a llenar los datos del votante 
@@ -45,7 +51,7 @@ void validate_id();
 void votante_register();
 
 /**
- * @brief Esto va a confirmare si con la edad ingresada se puede votar 
+ * @brief Esto va a confirmar si con la edad ingresada se puede votar 
  * 
  */
 void validate_age();
@@ -58,21 +64,10 @@ void colegios_disponibles();
 //TODO: Candidatos lo que hara es alamacenara los votos que se le hayan hecho a cada uno
 //TODO: Ver si tengo que poner un contador para cada candidato
 
-/**
- * @brief Estructura donde se guardaran los candidatos 
- * y los simbolos o numeros que hay que ejecutar para
- * poder votar por ese candidato
- */
-typedef struct candidatos
-{
-    char nombres[50];
-    int num_votacion;
-}Candidatos;
 
 /**
- * @brief 
+ * @brief En esta funcion se eligiran los votos y se iran sumando 
  * 
-
  */
 void select_your_candidate();
 

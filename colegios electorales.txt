@@ -1,4 +1,6 @@
-	Solo hay 5 colegios disponibles para votar dependiendo su zona:
+	
+
+			Solo hay 5 colegios disponibles para votar dependiendo su zona:
 
 	(1)Colegio Zona Norte
 	(2)Colegio Zona Sur
@@ -7,4 +9,5 @@
 	(5)Colegio Zona Santo Domingo
 
 
-					Si ya confirmo su colegio presione 'l' para continuar....
+				
+	Si ya confirmo su colegio presione 'l' para continuar....

@@ -19,13 +19,13 @@
 #include <unistd.h>
 #endif //__WIN32
 #include "../include/inicio.h"
-#include "../include/colegios.h"
+
 #include "../include/votantes.h"
-#include "../include/candidatos.h"
+
 // Tiempo que durara el copilador parado.
 
 #define time 2
-int votar_options()
+void votar_options()
 {
     int decission;
 
@@ -40,34 +40,29 @@ int votar_options()
            "\n\tBienvenido!"
            "\n\n\t\tAqui puede ejercer su derecho al voto =)"
            "\n\n Si desea confirmar su colegio Electoral antes presione 1 \n"
-           "\nSi quiere ir a la votacion presione 0 o cualquier otra tecla");
+           "\nSi quiere ir a la votacion presione 0 o cualquier otra tecla\n");
     scanf("%d", &decission);
-
-    while ((decission = getchar()) != '\n' || (decission = getchar()) != '\r')
-    {
+ 
+   // while ((decission = getchar()) != '\n' || (decission = getchar()) != '\r')
+   // {
         if (decission == '1')
         {
             colegios_disponibles();
         }
         else
         {
-            select_your_candidate();
+            votante_register();
         }
-    }
+    //
 }
 
 int print_start_menu()
 {
     unsigned options = 0;
 
-    clear_screen();
-    // Para que no se sienta la espera.
-    printf("Empezando sistema de carga...\n");
-    system_loading();
-
     /**+-+-+-+-+-+-Empieza el menu+-+-+-+-+-+- */
 
-    for (unsigned i = 3; i > 0 || options > 6; --i)
+    for (unsigned i = 1; i > 0 || options > 6; --i)
     {
         system("cls||clear");
 
@@ -81,7 +76,7 @@ int print_start_menu()
                "\t6- Salir del sistema \n"); // El usuario saldra cuando presione 6.
         scanf("%u", &options);
         getchar();
-        if ((options <= 0 && i != 3) || options > 6)
+        if ((options <= 0 && i != 1) || options > 6)
         {
             printf("Heyyy, debes eligir una opcion correcta!!!\n"
                    "Porque, pues te quedan %u intentos.\n",
@@ -89,21 +84,25 @@ int print_start_menu()
         }
     }
 
+  
     if (options >= VOTE && options <= EXIT)
     {
 
         switch (options)
         {
         case VOTE:
-            return votar_options();
+            votar_options();
+            break;
         case ELEGIBLE_TO_VOTE:
-            return validate_age();
-            /*case CANDIDATE_WITH_MOST_VOTES:
-        return;
+            validate_age();
+            break;
+        case CANDIDATE_WITH_MOST_VOTES:
+            candidate_winner();
+            break;
 
-    case CANDIDATE_WITH_LESS_VOTES:
-        return;
-        */
+        case CANDIDATE_WITH_LESS_VOTES:
+            candidate_looser();
+            break;
 
         case CONFIRM_COLEGIO_ELECTORAL:
             colegios_disponibles();
@@ -111,7 +110,7 @@ int print_start_menu()
         case EXIT:
             fflush(stdout);
             system("cls||clear");
-            printf("Gracias por ingresar a este programa!\n");
+            printf("\n\n\n\n\t\t\tGracias por ingresar a este programa!\n");
             exit(0);
         default:
             fprintf(stderr, "Verifica que hayas ingresadouna opcion correcta o "
@@ -127,7 +126,7 @@ void system_loading(void)
 {
     unsigned temp = 0;
 #ifdef __WIN32
-   temp = time * 1000;
+    temp = time * 1000;
 #endif //__WIN32
 
     for (unsigned i = 0; i <= 100; i++)

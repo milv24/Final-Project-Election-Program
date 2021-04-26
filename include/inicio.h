@@ -28,9 +28,8 @@ enum menu_option
  * @brief Esta funcion lo que hace es imprimir la cara de la opcion VOTE
  * para que el usuario elija si quiere ver su colegio electoral  antes
  * de proceder a la votacion. 
- * @return int 
  */
-int votar_options();
+void votar_options();
 
 /**
  * @brief Esta funcion va a imprimir el menu de entrada para el sistema de votacion 
