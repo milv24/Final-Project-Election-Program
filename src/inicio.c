@@ -42,18 +42,17 @@ void votar_options()
            "\n\n Si desea confirmar su colegio Electoral antes presione 1 \n"
            "\nSi quiere ir a la votacion presione 0 o cualquier otra tecla\n");
     scanf("%d", &decission);
- 
-   // while ((decission = getchar()) != '\n' || (decission = getchar()) != '\r')
-   // {
-        if (decission == '1')
-        {
-            colegios_disponibles();
-        }
-        else
-        {
-            votante_register();
-        }
-    //
+    
+    switch (decission)
+    {
+    case 1:
+        colegios_disponibles();
+        break;
+    
+    default:
+        votante_register();
+        break;
+    }
 }
 
 int print_start_menu()
@@ -84,7 +83,6 @@ int print_start_menu()
         }
     }
 
-  
     if (options >= VOTE && options <= EXIT)
     {
 
@@ -113,7 +111,7 @@ int print_start_menu()
             printf("\n\n\n\n\t\t\tGracias por ingresar a este programa!\n");
             exit(0);
         default:
-            fprintf(stderr, "Verifica que hayas ingresadouna opcion correcta o "
+            fprintf(stderr, "Verifica que hayas ingresado una opcion correcta o "
                             "envia un issue detallando el posible bug.\n");
             break;
         }
@@ -126,7 +124,7 @@ void system_loading(void)
 {
     unsigned temp = 0;
 #ifdef __WIN32
-    temp = time * 1000;
+    temp = time * 100;
 #endif //__WIN32
 
     for (unsigned i = 0; i <= 100; i++)

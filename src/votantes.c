@@ -35,7 +35,9 @@ votantes Votantes[MAX_VOTANTES];
 
 //Variables a utilizar en el que estaran los datos pedidos
 char nombre[50], apellido[50];
-unsigned id, edad, colegio;
+unsigned edad;
+unsigned colegio;
+int id[11];
 
 votantes Votantes[MAX_VOTANTES];
 //Variables para contar, guardar e ir aumentando los votos de cada candidato
@@ -93,16 +95,14 @@ void select_your_candidate()
                "Gracias  por ejercer su derecho!"
                "Presione 's' para ir al menu principal  ");
         scanf("%s", &decission);
-        while ((decission = getchar()) != '\n' || (decission = getchar()) != '\r')
+        getchar();
+        if (decission == 's')
         {
-            if (decission == 's')
-            {
-                print_start_menu();
-            }
-            else
-            {
-                exit(0);
-            }
+            print_start_menu();
+        }
+        else
+        {
+            exit(0);
         }
     }
 }
@@ -197,7 +197,8 @@ void candidate_winner()
     }
     else
     {
-        printf("\n\t\t\t----- Aun no se ha elegido ningun candidato como perdedor---");
+        printf("\n\t\t\t----- Aun no se ha elegido ningun candidato como perdedor---"
+               "\n\t\t\tO quizas hay un empate, espere a que voten mas personas por favor");
     }
 }
 
@@ -224,7 +225,8 @@ void votante_register()
     {
         for (size_t i = 0; i < MAX_VOTANTES; i++)
         {
-            /**
+            Votantes[i].has_votado = true; //se va a llenar el voto y no se va a poder repetir la cedula
+                                           /**
              * @brief Aqui se va a imprimir los datos que se necesitan 
              * para llenar las estructuras y luego pasarlas al fichero
              * "votantes.txt"
@@ -244,14 +246,13 @@ void votante_register()
             getchar();
 
             printf("\nNumero de Identificacion( 11 digitos):");
-            scanf("%u", &id);
-            getchar();
+            fgets(id, sizeof(id), stdin);
+            sscanf(id, "%d", &id);
             Votantes[i].ID = id;
 
             printf("\nEdad(+18):");
-            scanf("%u", &edad);
-            getchar();
-            Votantes[i].age = edad;
+            fgets(edad, sizeof(edad), stdin);
+            sscanf(edad, "%u", &edad);
 
             //Si es menor de 18 no lo dejara votar
             if (edad < 18)
@@ -262,21 +263,22 @@ void votante_register()
             }
             Votantes[i].age = edad;
 
-            printf("\nColegio Electoral");
-            scanf("%d", &colegio);
-            getchar();
-            Votantes[i].colegio_electoral = colegio;
+            printf("\nColegio Electoral:");
+            fgets(colegio, sizeof(colegio), stdin);
+            sscanf(colegio, "%u", &colegio);
             if (colegio >= 6)
-            {
+
                 //Como solo hay 5 colegios, si presiona 6 lo saca del sistema
                 printf("\nUps no existe este colegio!\n");
-            }
+
+            Votantes[i].colegio_electoral = colegio;
+
             //datos que se van a pasar al fichero
-            fprintf(v, "%s|\t%s|\t%u|\t%u|\t%d|\n", nombre, apellido, id, edad, colegio);
+            fprintf(v, "%s|\t%s|\t%u|\t%u|\t%u|\n", nombre, apellido, id, edad, colegio);
 
             fclose(v);
-            
-        } select_your_candidate(); //Lo va a llevar al lugar de votacion
+            select_your_candidate(); //Lo va a llevar al lugar de votacion
+        }
     }
 }
 
@@ -321,7 +323,7 @@ void iniciar_vote()
 {
     for (size_t i = 0; i < MAX_VOTANTES; i++)
     {
-       Votantes[i].has_votado = false;
+        Votantes[i].has_votado = false;
     }
 }
 
@@ -329,13 +331,13 @@ void validate_id()
 {
     for (size_t i = 0; i < MAX_VOTANTES; i++)
     {
-        if (Votantes[i].has_votado == true)
-        {
-            printf("\nUsted ya ha votado, no puede volver a votar!!\n")
-        }
-        
+        if (!Votantes[i].has_votado)
+
+            if (Votantes[i].ID = id)
+            {
+                printf("\nUsted ya ha votado, no puede volver a votar!!\n");
+            }
     }
-    
 }
 
 /**
@@ -343,7 +345,7 @@ void validate_id()
  * solo para que las personas confirmen a que colegio pertenecen
  * 
  */
-void colegios_disponibles()
+int colegios_disponibles()
 {
     char decission;
     char temp[100];
@@ -373,12 +375,11 @@ void colegios_disponibles()
     while ((decission = getchar()) != '\n' || (decission = getchar()) != '\r')
     {
         if (decission == 'l' || 'L')
-        {
+
             votante_register();
-        }
+
         else
-        {
+
             print_start_menu();
-        }
     }
 }

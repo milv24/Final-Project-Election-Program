@@ -59,7 +59,7 @@ void validate_age();
 /**
  * @brief Esta funcion solo va a imprimir los colegios que el sistema tenga registrados
  */
-void colegios_disponibles();
+int colegios_disponibles();
 
 //TODO: Candidatos lo que hara es alamacenara los votos que se le hayan hecho a cada uno
 //TODO: Ver si tengo que poner un contador para cada candidato
