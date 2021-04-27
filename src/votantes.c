@@ -30,6 +30,11 @@ const short time = 2;
 #define CANDIDATE0 "Voto en blanco"
 #define MAX_VOTANTES 100
 
+/**
+ * @brief Su voto solo se guardara cuando este dentro del programa, 
+ * luego que salga, este voto sera eliminado.
+*/
+
 //Estructura que almacena los datos de los votantes
 votantes Votantes[MAX_VOTANTES];
 
@@ -43,8 +48,7 @@ votantes Votantes[MAX_VOTANTES];
 //Variables para contar, guardar e ir aumentando los votos de cada candidato
 int votesCount1 = 0, votesCount2 = 0, votesCount3 = 0,
     votesCount4 = 0, emptytvotes = 0;
-//TODO quiero hacer que imprima cuantas personas votaron por este candidato
-//TODO como puedo guardar los votos
+
 /**
  * @brief Con esta funcion se elegiran los candidatos
  * Se ira sumando un contador para cada candidato por cada voto por ellos
@@ -225,7 +229,8 @@ void votante_register()
     {
         for (size_t i = 0; i < MAX_VOTANTES; i++)
         {
-            Votantes[i].has_votado = true; //se va a llenar el voto y no se va a poder repetir la cedula
+            char line[sizeof(int)];
+                       Votantes[i].has_votado = true; //se va a llenar el voto y no se va a poder repetir la cedula
                                            /**
              * @brief Aqui se va a imprimir los datos que se necesitan 
              * para llenar las estructuras y luego pasarlas al fichero
@@ -237,22 +242,20 @@ void votante_register()
             fgets(nombre, sizeof(nombre), stdin); //leera el nombre y lo guardara en la variable
             nombre[strlen(nombre) - 1] = '\0';
             strcpy(Votantes[i].name, nombre); //copiara la variable antes pedida y la guardara en la estructura
-            getchar();
 
             printf("\nApellido(primer):");
             fgets(apellido, sizeof(apellido), stdin);
             apellido[strlen(apellido) - 1] = '\0';
             strcpy(Votantes[i].lastname, apellido);
-            getchar();
 
             printf("\nNumero de Identificacion( 11 digitos):");
-            fgets(id, sizeof(id), stdin);
-            sscanf(id, "%d", &id);
+            fgets(line, sizeof(line), stdin);
+            sscanf(line, "%d", &id);
             Votantes[i].ID = id;
 
             printf("\nEdad(+18):");
-            fgets(edad, sizeof(edad), stdin);
-            sscanf(edad, "%u", &edad);
+            fgets(line, sizeof(line), stdin);
+            sscanf(line, "%u", &edad);
 
             //Si es menor de 18 no lo dejara votar
             if (edad < 18)
@@ -264,8 +267,8 @@ void votante_register()
             Votantes[i].age = edad;
 
             printf("\nColegio Electoral:");
-            fgets(colegio, sizeof(colegio), stdin);
-            sscanf(colegio, "%u", &colegio);
+            fgets(line, sizeof(line), stdin);
+            sscanf(line, "%u", &colegio);
             if (colegio >= 6)
 
                 //Como solo hay 5 colegios, si presiona 6 lo saca del sistema

@@ -15,7 +15,7 @@
 #include "../include/inicio.h"
 int main()
 {
-	system("color E4"); //cambia el color, el numero cambia el fondo
+	system("color B0"); //cambia el color, el numero cambia el fondo
 						// y la letra cambia el color de letra
 						// https://www.geeksforgeeks.org/how-to-print-colored-text-in-c/
 
