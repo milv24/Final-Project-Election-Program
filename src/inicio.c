@@ -42,6 +42,7 @@ void votar_options()
            "\n\n Si desea confirmar su colegio Electoral antes presione 1 \n"
            "\nSi quiere ir a la votacion presione 0 o cualquier otra tecla\n");
     scanf("%d", &decission);
+    getchar();
     
     switch (decission)
     {

@@ -225,6 +225,7 @@ void votante_register()
     char line[sizeof(int)]; // Donde se guardara a el input recibido con fgets.
     bool llenado = true;    // Para salir del loop luego de haber llenado una
                             // estructura.
+    char line[sizeof(int)];
     //Abriremos nuestro fichero
     v = fopen("votantes.txt", "a");
     if (v == NULL)
@@ -236,23 +237,23 @@ void votante_register()
     {
         for (size_t i = 0; i < MAX_VOTANTES && llenado; i++)
         {
-            char line[sizeof(int)];
             Votantes[i].has_votado = true; //se va a llenar el voto y no se va a poder repetir la cedula
-                                           /**
+                                           
+            /**
              * @brief Aqui se va a imprimir los datos que se necesitan 
              * para llenar las estructuras y luego pasarlas al fichero
              * "votantes.txt"
              */
             printf("\n\t\t\tIntroduzca sus datos para registrar su voto exitosamente");
 
-            printf("\nNombre(primer):");
+            printf("\nNombre(primer): ");
             fgets(Votantes[i].name, sizeof(Votantes[i].name), stdin); //leera el nombre y lo guardara en la variable
-            nombre[strlen(nombre) - 1] = '\0';
+            Votantes[i].name[strlen(Votantes[i].name) - 1] = '\0';
             //copiara la variable antes pedida y la guardara en la estructura
 
-            printf("\nApellido(primer):");
+            printf("\nApellido(primer): ");
             fgets(Votantes[i].lastname, sizeof(Votantes[i].lastname), stdin);
-            apellido[strlen(apellido) - 1] = '\0';
+            Votantes[i].lastname[strlen(Votantes[i].lastname) - 1] = '\0';
 
             printf("\nNumero de Identificacion( 11 digitos):");
             fgets(line, sizeof(line), stdin);
