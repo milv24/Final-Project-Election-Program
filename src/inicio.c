@@ -25,18 +25,7 @@
 // Tiempo que durara el copilador parado.
 #define time 2
 
-/**
- * @brief Esto va acolorearr el background y a poner el color de las letras
- * 
- * @return int 
- */
-int colors()
-{
-    system("color B0"); //cambia el color, el numero cambia el fondo
-                        // y la letra cambia el color de letra
-                        //Para mas info de estos colores
-                        // https://www.geeksforgeeks.org/how-to-print-colored-text-in-c/
-}
+
 /**
  * @brief Esta funcion va a permitir elegir las opciones 
  * que el usuario quiera realizar 

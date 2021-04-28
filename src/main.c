@@ -29,6 +29,10 @@ por lo que no se debe salir sin ver los votos, porque se borraran inmediatamente
  */
 int main()
 {
+	system("color B0"); //cambia el color, el numero cambia el fondo
+                        // y la letra cambia el color de letra
+                        //Para mas info de estos colores
+                        // https://www.geeksforgeeks.org/how-to-print-colored-text-in-c/
 
 	system("cls||clear");
 
