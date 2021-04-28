@@ -33,10 +33,11 @@
 
 
 /**
- * @brief Esto va a validar que la cedula no se haya repetido
+ * @brief Esto va a validar que la cedula no se repita
  * 
+ * @param id 
  */
-void validate_id();
+void validate_id(unsigned id);
 
 /**
  * @brief Esta va a inicializar el voto
