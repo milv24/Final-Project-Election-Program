@@ -24,7 +24,7 @@ typedef struct Registro_datos
    char name[50];
    char lastname[50];
    unsigned age;
-   unsigned ID;
+   char ID[11];
    unsigned short colegio_electoral;
    bool has_votado; //para validar el id
 

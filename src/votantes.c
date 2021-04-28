@@ -38,12 +38,6 @@ const short time = 2;
 //Estructura que almacena los datos de los votantes
 votantes Votantes[MAX_VOTANTES];
 
-//Variables a utilizar en el que estaran los datos pedidos
-char nombre[50], apellido[50];
-unsigned edad;
-unsigned colegio;
-
-votantes Votantes[MAX_VOTANTES];
 //Variables para contar, guardar e ir aumentando los votos de cada candidato
 int votesCount1 = 0, votesCount2 = 0, votesCount3 = 0,
     votesCount4 = 0, emptytvotes = 0;
@@ -225,64 +219,69 @@ void votante_register()
     char line[sizeof(int)]; // Donde se guardara a el input recibido con fgets.
     bool llenado = true;    // Para salir del loop luego de haber llenado una
                             // estructura.
-    char line[sizeof(int)];
-    //Abriremos nuestro fichero
-    v = fopen("votantes.txt", "a");
-    if (v == NULL)
+                            //Abriremos nuestro fichero
+
+    for (size_t i = 0; i < MAX_VOTANTES && llenado; i++)
     {
-        printf("No se pudo abrir el archivo.\n"); //Imprimira si no se pudo abrir el archivo
-        exit(1);
-    }
-    else
-    {
-        for (size_t i = 0; i < MAX_VOTANTES && llenado; i++)
-        {
-            /**
+        /**
              * @brief Aqui se va a imprimir los datos que se necesitan 
              * para llenar las estructuras y luego pasarlas al fichero
              * "votantes.txt"
              */
-            printf("\n\t\t\tIntroduzca sus datos para registrar su voto exitosamente");
+        printf("\n\t\t\tIntroduzca sus datos para registrar su voto exitosamente");
 
-            printf("\nNombre(primer): ");
-            fgets(Votantes[i].name, sizeof(Votantes[i].name), stdin); //leera el nombre y lo guardara en la variable
-            Votantes[i].name[strlen(Votantes[i].name) - 1] = '\0';
-            //copiara la variable antes pedida y la guardara en la estructura
+        printf("\nNombre(primer): ");
+        fgets(Votantes[i].name, sizeof(Votantes[i].name), stdin); //leera el nombre y lo guardara en la variable
+        Votantes[i].name[strlen(Votantes[i].name) - 1] = '\0';
+        //copiara la variable antes pedida y la guardara en la estructura
 
-            printf("\nApellido(primer): ");
-            fgets(Votantes[i].lastname, sizeof(Votantes[i].lastname), stdin);
-            Votantes[i].lastname[strlen(Votantes[i].lastname) - 1] = '\0';
+        printf("\nApellido(primer): ");
+        fgets(Votantes[i].lastname, sizeof(Votantes[i].lastname), stdin);
+        Votantes[i].lastname[strlen(Votantes[i].lastname) - 1] = '\0';
 
-            printf("\nNumero de Identificacion( 11 digitos): ");
+        printf("\nNumero de Identificacion( 11 digitos): ");
+        scanf("%s", Votantes[i].ID);
+        getchar();
+       
+        printf("\nEdad(+18): ");
+        fgets(line, sizeof(line) * 2, stdin);
+        sscanf(line, "%u", &Votantes[i].age);
+
+        Votantes[i].has_votado = true; //se va a llenar el voto y no se va a poder repetir la cedula
+
+        //Si es menor de 18 no lo dejara votar
+        if (Votantes[i].age >= 18)
+        {
+            printf("\nColegio Electoral:");
             fgets(line, sizeof(line), stdin);
-            sscanf(line, "%d", &Votantes[i].ID);
+            sscanf(line, "%hu", &Votantes[i].colegio_electoral);
 
-            printf("\nEdad(+18): ");
-            fgets(line, sizeof(line), stdin);
-            sscanf(line, "%u", &Votantes[i].age);
-
-            Votantes[i].has_votado = true; //se va a llenar el voto y no se va a poder repetir la cedula
-
-            //Si es menor de 18 no lo dejara votar
-            if (Votantes[i].age >= 18)
-            {
-                printf("\nColegio Electoral:");
-                fgets(line, sizeof(line), stdin);
-                sscanf(line, "%hu", &Votantes[i].colegio_electoral);
-
-                if (Votantes[i].colegio_electoral >= 6)
-                    //Como solo hay 5 colegios, si presiona 6 lo saca del sistema
-                    printf("\nUps no existe este colegio!\n");
-
-                //datos que se van a pasar al fichero
-                fprintf(v, "%s|\t%s|\t%u|\t%u|\t%u|\n", Votantes[i].name, 
-                        Votantes[i].lastname, Votantes[i].ID, Votantes[i].age, 
-                        Votantes[i].colegio_electoral);
-
-                fclose(v);
-                select_your_candidate(); //Lo va a llevar al lugar de votacion
-                llenado = false;
+            if (Votantes[i].colegio_electoral <= 0 || Votantes[i].colegio_electoral > 5)
+            { //Como solo hay 5 colegios, si presiona 6 lo saca del sistema
+                printf("\nUps no existe este colegio!\n");
+                Sleep(200);
+                colegios_disponibles();
             }
+            v = fopen("votantes.txt", "a");
+            if (v == NULL)
+            {
+                printf("No se pudo abrir el archivo.\n"); //Imprimira si no se pudo abrir el archivo
+                exit(1);
+            }
+            //datos que se van a pasar al fichero
+            fprintf(v, "%s|\t%s|\t%s|\t%u|\t%hu|\n", Votantes[i].name,
+                    Votantes[i].lastname, Votantes[i].ID, Votantes[i].age,
+                    Votantes[i].colegio_electoral);
+
+            fclose(v);
+            select_your_candidate(); //Lo va a llevar al lugar de votacion
+            llenado = false;
+        }
+        else
+        {
+            printf("Usted no esta apto para votar aun =(");
+            system("pause");
+            exit(0);
         }
     }
 }
@@ -296,26 +295,29 @@ void votante_register()
 void validate_age()
 {
     clear_screen();
-
-    printf("Para saber si puedesvotar solo tienes que ingresar tu edad para verificarla!"
-           "Ingresa tu edad:");
-    scanf("%u", &edad);
-    getchar();
-    if (edad < 18)
+    for (size_t i = 0; i < MAX_VOTANTES; i++)
     {
-        printf("Usted no es apto para votar, lo sentimos =(");
-        system("pause");
-        Sleep(200);
-        system("cls||clear");
-    }
-    else
-    {
-        printf("Usted esta apto para votar, continue el proceso =)");
-        system("pause");
-        Sleep(200);
-        system("cls||clear");
+        printf("\n\n\t\tPara saber si puedes votar solo tienes que ingresar tu edad para verificarla!"
+               "\n\t\tIngresa tu edad:\n");
+        scanf("%u", &Votantes[i].age);
+        getchar();
+        if (Votantes[i].age < 18)
+        {
+            printf("Usted no es apto para votar, lo sentimos =(");
+            system("pause");
+            Sleep(200);
+            system("cls||clear");
+            exit(0);
+        }
+        else
+        {
+            printf("Usted esta apto para votar, continue el proceso =)");
+            system("pause");
+            Sleep(200);
+            system("cls||clear");
 
-        print_start_menu();
+            print_start_menu();
+        }
     }
 }
 /**
@@ -382,10 +384,13 @@ int colegios_disponibles()
     {
         if (decission == 'l' || 'L')
 
-            votante_register();
+        {
+            getchar();
+            votante_register();//Te lleva a registrarte
+        }
 
         else
 
-            print_start_menu();
+            print_start_menu();//sino imprime el menu de inicio
     }
 }

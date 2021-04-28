@@ -25,6 +25,23 @@
 // Tiempo que durara el copilador parado.
 #define time 2
 
+/**
+ * @brief Esto va acolorearr el background y a poner el color de las letras
+ * 
+ * @return int 
+ */
+int colors()
+{
+    system("color B0"); //cambia el color, el numero cambia el fondo
+                        // y la letra cambia el color de letra
+                        //Para mas info de estos colores
+                        // https://www.geeksforgeeks.org/how-to-print-colored-text-in-c/
+}
+/**
+ * @brief Esta funcion va a permitir elegir las opciones 
+ * que el usuario quiera realizar 
+ * 
+ */
 void votar_options()
 {
     int decission;
@@ -49,16 +66,20 @@ void votar_options()
     case 1:
         colegios_disponibles();
         break;
-    
+
     default:
         votante_register();
         break;
     }
 }
-
+/**
+ * @brief Aqui se imprime el menu de inicio para la ejecucion del programa
+ * 
+ * @return int 
+ */
 int print_start_menu()
 {
-    unsigned options = 0;
+    unsigned options = 0;//variable para opciones a escoger// input
 
     /**+-+-+-+-+-+-Empieza el menu+-+-+-+-+-+- */
 
@@ -120,7 +141,11 @@ int print_start_menu()
     putchar('\n');
     return 0;
 }
-
+/**
+ * @brief Para que no se sienta el tiempo de ejecucion
+ * se emplea esta funcion como metodo de carga
+ * 
+ */
 void system_loading(void)
 {
     unsigned temp = 0;
@@ -150,6 +175,9 @@ void system_loading(void)
 #endif //__WIN32
     }
 }
+/**
+ * Limpuador de pantalla 
+ */
 void clear_screen()
 {
     fflush(stdout);
