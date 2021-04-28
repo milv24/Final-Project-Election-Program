@@ -122,31 +122,36 @@ void candidate_looser()
 
     printf("\n \t\t El candidato con menos votos hasta el momento es:\n\n");
 
-    if (votesCount1 < votesCount2 && votesCount1 < votesCount3 && votesCount1 < votesCount4 && votesCount1 < emptytvotes)
+    if (votesCount1 < votesCount2 && votesCount1 < votesCount3 &&
+        votesCount1 < votesCount4 && votesCount1 < emptytvotes)
     {
         printf("\n\t%s", CANDIDATE1);
         printf("\n\t%d personas votaron por este candidato!", votesCount1);
         printf("\t\tPor lo que va perdiendo =(\n");
     }
-    else if (votesCount2 < votesCount3 && votesCount2 < votesCount4 && votesCount2 < votesCount1 && votesCount2 < emptytvotes)
+    else if (votesCount2 < votesCount3 && votesCount2 < votesCount4 &&
+             votesCount2 < votesCount1 && votesCount2 < emptytvotes)
     {
         printf("\n\t%s", CANDIDATE2);
         printf("\n\t%d personas votaron por este candidato!", votesCount2);
         printf("\t\tPor lo que va perdiendo =(\n");
     }
-    else if (votesCount3 < votesCount4 && votesCount3 < votesCount2 && votesCount3 < votesCount1 && votesCount3 < emptytvotes)
+    else if (votesCount3 < votesCount4 && votesCount3 < votesCount2 &&
+             votesCount3 < votesCount1 && votesCount3 < emptytvotes)
     {
         printf("\n\t%s", CANDIDATE3);
         printf("\n\t%d personas votaron por este candidato!", votesCount3);
         printf("\t\tPor lo que va perdiendo =(\n");
     }
-    else if (votesCount4 < votesCount1 && votesCount4 < votesCount2 && votesCount4 < votesCount3 && votesCount4 < emptytvotes)
+    else if (votesCount4 < votesCount1 && votesCount4 < votesCount2 &&
+             votesCount4 < votesCount3 && votesCount4 < emptytvotes)
     {
         printf("\n\t%s", CANDIDATE4);
         printf("\n\t%d personas votaron por este candidato!", votesCount4);
         printf("\t\tPor lo que va perdiendo =(\n");
     }
-    else if (emptytvotes < votesCount1 && emptytvotes < votesCount2 && emptytvotes < votesCount3 && emptytvotes < votesCount4)
+    else if (emptytvotes < votesCount1 && emptytvotes < votesCount2 &&
+             emptytvotes < votesCount3 && emptytvotes < votesCount4)
     {
         printf("\n\t%s", CANDIDATE0);
         printf("\n\t%d personas votaron por este candidato!", emptytvotes);
@@ -217,7 +222,10 @@ void votante_register()
     printf("Empezando sistema de carga...\n");
     system_loading();
 
-    FILE *v; //Nombre del fichero
+    FILE *v;                // Nombre del fichero
+    char line[sizeof(int)]; // Donde se guardara a el input recibido con fgets.
+    bool llenado = true;    // Para salir del loop luego de haber llenado una
+                            // estructura.
     //Abriremos nuestro fichero
     v = fopen("votantes.txt", "a");
     if (v == NULL)
@@ -227,60 +235,64 @@ void votante_register()
     }
     else
     {
-        for (size_t i = 0; i < MAX_VOTANTES; i++)
+        for (size_t i = 0; i < MAX_VOTANTES && llenado; i++)
         {
-            char line[sizeof(int)];
-                       Votantes[i].has_votado = true; //se va a llenar el voto y no se va a poder repetir la cedula
-                                           /**
-             * @brief Aqui se va a imprimir los datos que se necesitan 
-             * para llenar las estructuras y luego pasarlas al fichero
-             * "votantes.txt"
-             */
-            printf("\n\t\t\tIntroduzca sus datos para registrar su voto exitosamente");
-
-            printf("\nNombre(primer):");
-            fgets(nombre, sizeof(nombre), stdin); //leera el nombre y lo guardara en la variable
-            nombre[strlen(nombre) - 1] = '\0';
-            strcpy(Votantes[i].name, nombre); //copiara la variable antes pedida y la guardara en la estructura
-
-            printf("\nApellido(primer):");
-            fgets(apellido, sizeof(apellido), stdin);
-            apellido[strlen(apellido) - 1] = '\0';
-            strcpy(Votantes[i].lastname, apellido);
-
-            printf("\nNumero de Identificacion( 11 digitos):");
-            fgets(line, sizeof(line), stdin);
-            sscanf(line, "%d", &id);
-            Votantes[i].ID = id;
-
-            printf("\nEdad(+18):");
-            fgets(line, sizeof(line), stdin);
-            sscanf(line, "%u", &edad);
-
-            //Si es menor de 18 no lo dejara votar
-            if (edad < 18)
+            if (!Votantes[i].has_votado)
             {
-                printf("Usted no esta apto para votar aun =(");
-                system("pause");
-                exit(0);
+                Votantes[i].has_votado = true; //se va a llenar el voto y no se va a poder repetir la cedula
+
+                /**
+                 * @brief Aqui se va a imprimir los datos que se necesitan 
+                 * para llenar las estructuras y luego pasarlas al fichero
+                 * "votantes.txt"
+                 */
+                printf("\n\t\t\tIntroduzca sus datos para registrar su voto exitosamente");
+
+                printf("\nNombre(primer):");
+                fgets(nombre, sizeof(nombre), stdin); //leera el nombre y lo guardara en la variable
+                nombre[strlen(nombre) - 1] = '\0';
+                strcpy(Votantes[i].name, nombre); //copiara la variable antes pedida y la guardara en la estructura
+
+                printf("\nApellido(primer):");
+                fgets(apellido, sizeof(apellido), stdin);
+                apellido[strlen(apellido) - 1] = '\0';
+                strcpy(Votantes[i].lastname, apellido);
+
+                printf("\nNumero de Identificacion( 11 digitos):");
+                fgets(line, sizeof(line), stdin);
+                sscanf(line, "%d", &id);
+                Votantes[i].ID = id;
+
+                printf("\nEdad(+18):");
+                fgets(line, sizeof(line), stdin);
+                sscanf(line, "%u", &edad);
+
+                //Si es menor de 18 no lo dejara votar
+                if (edad < 18)
+                {
+                    printf("Usted no esta apto para votar aun =(");
+                    system("pause");
+                    exit(0);
+                }
+                Votantes[i].age = edad;
+
+                printf("\nColegio Electoral:");
+                fgets(line, sizeof(line), stdin);
+                sscanf(line, "%u", &colegio);
+                if (colegio >= 6)
+
+                    //Como solo hay 5 colegios, si presiona 6 lo saca del sistema
+                    printf("\nUps no existe este colegio!\n");
+
+                Votantes[i].colegio_electoral = colegio;
+
+                //datos que se van a pasar al fichero
+                fprintf(v, "%s|\t%s|\t%u|\t%u|\t%u|\n", nombre, apellido, id, edad, colegio);
+
+                fclose(v);
+                select_your_candidate(); //Lo va a llevar al lugar de votacion
+                llenado = false;
             }
-            Votantes[i].age = edad;
-
-            printf("\nColegio Electoral:");
-            fgets(line, sizeof(line), stdin);
-            sscanf(line, "%u", &colegio);
-            if (colegio >= 6)
-
-                //Como solo hay 5 colegios, si presiona 6 lo saca del sistema
-                printf("\nUps no existe este colegio!\n");
-
-            Votantes[i].colegio_electoral = colegio;
-
-            //datos que se van a pasar al fichero
-            fprintf(v, "%s|\t%s|\t%u|\t%u|\t%u|\n", nombre, apellido, id, edad, colegio);
-
-            fclose(v);
-            select_your_candidate(); //Lo va a llevar al lugar de votacion
         }
     }
 }
