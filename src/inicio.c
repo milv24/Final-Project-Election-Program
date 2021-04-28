@@ -23,8 +23,8 @@
 #include "../include/votantes.h"
 
 // Tiempo que durara el copilador parado.
-
 #define time 2
+
 void votar_options()
 {
     int decission;
@@ -43,7 +43,7 @@ void votar_options()
            "\nSi quiere ir a la votacion presione 0 o cualquier otra tecla\n");
     scanf("%d", &decission);
     getchar();
-    
+
     switch (decission)
     {
     case 1:

@@ -19,18 +19,16 @@
 /**
  * @brief Estructura llenar los datos del votante 
  */
- typedef struct Registro_datos
+typedef struct Registro_datos
 {
    char name[50];
    char lastname[50];
    unsigned age;
    unsigned ID;
-   bool colegio_electoral;
-   bool has_votado;  //para validar el id
+   unsigned short colegio_electoral;
+   bool has_votado; //para validar el id
 
-
-}votantes;
-
+} votantes;
 
 /**
  * @brief Esto va a validar que la cedula no se repita
@@ -65,7 +63,6 @@ int colegios_disponibles();
 //TODO: Candidatos lo que hara es alamacenara los votos que se le hayan hecho a cada uno
 //TODO: Ver si tengo que poner un contador para cada candidato
 
-
 /**
  * @brief En esta funcion se eligiran los votos y se iran sumando 
  * 
@@ -78,11 +75,10 @@ void select_your_candidate();
  */
 void candidate_winner();
 
-
 /**
  * @brief Esta lo que hara es mostrar el nombre del candidato con menos votos
  * 
  */
 void candidate_looser();
 
-#endif//VOTANTES_H
+#endif //VOTANTES_H
